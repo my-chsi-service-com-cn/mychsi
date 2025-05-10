@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>学信档案</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 0px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .button-overlay {
+            position: absolute;
+            padding: 120px 545px;
+            font-size: 16px;
+            color: white;
+            background-color: transparent; /* 完全透明 */
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-small {
+            width: 150px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            background-color: transparent; /* 完全透明 */
+            z-index: 20;
+        }
+
+        /* 橙色方块按钮样式 */
+        .button-square-orange {
+            position: absolute;
+            top: 80px;
+            left: 75px;
+            width: 30px;
+            height: 30px;
+            background-color: transparent; /* 完全透明 */
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            max-width: 90%;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 100;
+            font-size: 14px;
+        }
+
+        .dialog:target {
+            display: block;
+        }
+
+        .dialog-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: #f8f9fa;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .dialog-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .dialog-content {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .dialog-footer {
+            padding: 15px 20px;
+            text-align: right;
+            border-top: 1px solid #e5e5e5;
+            background-color: #f8f9fa;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .help-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 90;
+            display: none;
+        }
+
+        .dialog:target + .overlay {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="page1.png" alt="学信档案">
+
+        <!-- 橙色方块按钮 -->
+        <a href="index.html" class="button-square-orange" title="返回上一页"></a>
+
+        <!-- 按钮第二学士学位 -->
+        <button class="button-overlay" onclick="window.location.href='pagedierxuewei.html'" style="top: 880px; left: 75px;"></button>
+        
+        <!-- 按钮硕士 -->
+        <button class="button-overlay" onclick="window.location.href='pageshuoshi.html'" style="top: 580px; left: 75px;"></button>
+
+        <!-- 按钮本科 -->
+        <button class="button-overlay" onclick="window.location.href='pagebenke.html'" style="top: 1180px; left: 75px;"></button>
+
+        <!-- 按钮学历 -->
+        <button class="button-overlay" onclick="window.location.href='pagexueli.html'" style="top: 1610px; left: 75px;"></button>
+
+        <!-- 按钮考研信息 -->
+        <button class="button-overlay" onclick="window.location.href='pagekaoyanxinxi.html'" style="top: 2610px; left: 75px;"></button>
+
+        <!-- 新增：学籍绑定按钮 -->
+        <a href="#studentBindingDialog" class="button-overlay button-small" style="top: 470px; left: 1015px;"></a>
+        <a href="#studentBindingDialog" class="button-overlay button-small" style="top: 1500px; left: 1015px;"></a>
+        <a href="#studentBindingDialog" class="button-overlay button-small" style="top: 1940px; left: 1015px;"></a>
+
+        <!-- 学籍绑定对话框 -->
+        <div id="studentBindingDialog" class="dialog">
+            <div class="dialog-header">
+                <h3 class="dialog-title">学籍绑定</h3>
+            </div>
+            <div class="dialog-content">
+                <form>
+                    <div class="form-group">
+                        <label for="studentId">*学号</label>
+                        <input type="text" id="studentId" class="form-control" placeholder="请输入学号">
+                    </div>
+                    <div class="form-group">
+                        <label for="schoolName">*学校名称</label>
+                        <input type="text" id="schoolName" class="form-control" placeholder="请输入学校名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="enrollYear">*入学年份</label>
+                        <input type="text" id="enrollYear" class="form-control" placeholder="必须为4位数字">
+                    </div>
+                    <div class="form-group">
+                        <label for="level">*层次</label>
+                        <select id="level" class="form-control">
+                            <option value="">请选择层次</option>
+                            <option value="本科">本科</option>
+                            <option value="专科">专科</option>
+                        </select>
+                    </div>
+                    <div class="help-text">
+                        <p>本功能用于查找、绑定学籍查询范围内无法根据实名认证信息自动匹配的学籍。</p>
+                        <p>您只有5次机会，请确认输入的内容与本人的学籍信息完全一致。</p>
+                        <p>如果查不到本人的学籍，请联系就读院校学籍管理部门。</p>
+                        <p>如果不知道学号，请联系就读院校学籍管理部门。</p>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-footer">
+                <a href="#" class="btn btn-primary">确认</a>
+                <a href="#" class="btn btn-secondary">取消</a>
+            </div>
+        </div>
+
+        <!-- 遮罩层 -->
+        <div class="overlay"></div>
+    </div>
+</body>
+</html>

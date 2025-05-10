@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>学信档案</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 0px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative; /* 关键：让按钮相对于此容器定位 */
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+
+	/* 按钮返回上一页 */
+        .button-overlay {
+            position: absolute;
+            padding: 20px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: transparent; /* 完全透明 */
+            border: none;                                     /* 去除边框 */
+            cursor: pointer;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="pagedierxuewei.png" alt="学信档案">
+
+
+        <!-- 按钮返回上一页 -->
+        <button class="button-overlay" onclick="window.location.href='page1.html'" style="top: 80px; left: 75px;"></button>
+        
+</button>
+
+    </div>
+</body>
+</html>
